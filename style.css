@@ -1,0 +1,32 @@
+.title {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+}
+
+.title svg {
+    width: 500px;
+}
+
+.menus {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 2px solid #ebebeb;
+    border-bottom: 4px double #000;
+}
+
+.menus button {
+    background: none;
+    border: none;
+    margin: 6px;
+}
+
+.menus button:hover {
+    background-color: thistle;
+}
+
+.news {
+    border-bottom: 1px solid #000;
+}
