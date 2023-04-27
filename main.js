@@ -1,28 +1,36 @@
 let news = [];
 let menus = document.querySelectorAll(".menus button");
 menus.forEach((menu) =>menu.addEventListener("click", (e) => getNewsByTopic(e)));
+let searchBtn = document.getElementById("search_btn");
+let url;
 
-const getLatestNews = async() => {
-    let url = new URL('https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=business&page_size=10') 
-    let header = new Headers({'x-api-key' : 'zB2nLs_Le3g1zAAaUr-Ike1cgUSkfmtnb4_2RDzYeTM'});
-    let response = await fetch(url, {headers:header});
-    let data = await response.json();
+const getNews = async() => {
+    // let header = new Headers({'x-api-key' : 'zB2nLs_Le3g1zAAaUr-Ike1cgUSkfmtnb4_2RDzYeTM'});
+    // let response = await fetch(url, {headers:header});
+    // let data = await response.json();
     // console.log("data", data);
-    news = data.articles
+    news = data.articles;
     // console.log(news);
-
     render();
+}
+ 
+const getLatestNews = async() => {
+    // url = new URL('https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=business&page_size=10') 
+    getNews();
 };
 
 const getNewsByTopic = async(e) => {
-    let topic = e.target.textContent.toLowerCase();
-    let url = new URL(`https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10&topic=${topic}`);
-    let header = new Headers({'x-api-key' : 'zB2nLs_Le3g1zAAaUr-Ike1cgUSkfmtnb4_2RDzYeTM'});
-    let response = await fetch(url, {headers:header});
-    let data = await response.json();
-    news = data.articles
-    render();
+    // let topic = e.target.textContent.toLowerCase();
+    // url = new URL(`https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&page_size=10&topic=${topic}`);
+    getNews();
 };
+
+const getNewsByKeyword = async() => {
+    let keyWord = document.getElementById("search_input").value
+    // console.log("키워드", keyWord);
+    // url = new URL(`https://api.newscatcherapi.com/v2/search?q=${keyWord}&countries=KR&page_size=10`)
+    getNews();
+}
 
 const render = () => {
     let newsHTML = "";
@@ -52,4 +60,5 @@ const render = () => {
     }).join('');
     document.getElementById("news_board").innerHTML = newsHTML;
 };
+searchBtn.addEventListener("click", getNewsByKeyword);
 getLatestNews();
